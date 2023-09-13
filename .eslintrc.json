@@ -28,9 +28,9 @@
 	"settings": {
 		"import/resolver": {
 			"alias": {
-				"map": [["@", "./app"]]
+				"map": [["@", "./src"]]
 			},
-      "extensions": [".js"]
+			"extensions": [".js"]
 		}
 	}
 }
