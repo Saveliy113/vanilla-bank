@@ -51,7 +51,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'public'),
     },
-    histiryApiFallback: true,
+    historyApiFallback: true,
   },
   optimization: {
     minimize: isDev,
@@ -105,7 +105,7 @@ module.exports = {
         ],
       },
       {
-        test: /^((?!\module).)*s[ac]ss$/i,
+        test: /^((?!\.module).)*s[ac]ss$/i,
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -116,6 +116,33 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
     ],
   },
