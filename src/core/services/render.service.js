@@ -9,11 +9,8 @@ class RenderService {
 	 */
 	htmlToElement(html, components = [], styles) {
 		const template = document.createElement('template');
-		console.log(template);
 		template.innerHTML = html.trim();
 		const element = template.content.firstChild;
-
-		console.log(element);
 
 		if (styles) {
 			this.#applyModuleStyles(styles, element);
@@ -78,9 +75,6 @@ class RenderService {
 				}
 			}
 		};
-
-		console.log('ELEMENT GETATTRIBUTE: ', element.getAttribute('class'));
-		console.log('ELEMENT QUERY ALL: ', element.querySelectorAll('*'));
 
 		if (element.getAttribute('class')) {
 			applyStyles(element);
