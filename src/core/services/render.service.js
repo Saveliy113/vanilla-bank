@@ -16,6 +16,7 @@ class RenderService {
 			this.#applyModuleStyles(styles, element);
 		}
 
+
 		return element;
 	}
 
@@ -25,15 +26,15 @@ class RenderService {
 	 * @param {Array} components
 	 */
 	#replaceComponentTags(parentElement, components) {
-		const componentTagPatern = /^component-/;
+		const componentTagPattern = /^component-/;
 
 		const allElements = parentElement.getElementsByTagName('*');
 
 		for (const element of allElements) {
 			const elementTagName = element.tagName.toLowerCase();
-			if (componentTagPatern.test(elementTagName)) {
+			if (componentTagPattern.test(elementTagName)) {
 				const componentName = elementTagName
-					.replace(componentTagPatern, '')
+					.replace(componentTagPattern, '')
 					.replace(/-/g, '');
 
 				const foundComponent = components.find(Component => {

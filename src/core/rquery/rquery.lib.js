@@ -82,6 +82,19 @@ class RQuery {
 	}
 
 	/**
+	 * Attach a click event listener to the selected element.
+	 * @param {function(Event): void} callback - The event listener
+	 * function to execute when the selected element is clicked. The
+	 * function will receive the event object	as its argument.
+	 * @returns {RQuery} - The current RQuery instance for chaining.
+	 */
+	click(callback) {
+		this.element.addEventListener('click', callback);
+
+		return this;
+	}
+
+	/**
 	 * Set CSS style of selected element
 	 * @param {string} property - CSS property to set
 	 * @param {string} value - Value to set for the CSS property
@@ -93,6 +106,42 @@ class RQuery {
 		}
 
 		this.element.style[property] = value;
+		return this;
+	}
+
+	/**
+	 * Add a class or a list of classes to the current element.
+	 * @param {string | string[]} classNames - A single class name or
+	 * an array of class names to add to the element.
+	 * @returns {RQuery} - Current RQuery instance for chaining.
+	 */
+	addClass(classNames) {
+		if (Array.isArray(classNames)) {
+			for (const className of classNames) {
+				this.element.classList.add(className);
+			}
+		} else {
+			this.element.classList.add(classNames);
+		}
+
+		return this;
+	}
+
+	/**
+	 * Remove a class or a list of classes to the current element.
+	 * @param {string | string[]} classNames - A single class name or
+	 * an array of class names to add to the element.
+	 * @returns {RQuery} - Current RQuery instance for chaining.
+	 */
+	removeClass(classNames) {
+		if (Array.isArray(classNames)) {
+			for (const className of classNames) {
+				this.element.classList.remove(className);
+			}
+		} else {
+			this.element.classList.remove(classNames);
+		}
+
 		return this;
 	}
 }
