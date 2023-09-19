@@ -43,8 +43,6 @@ class RenderService {
 					const instance =
 						Component instanceof ChildComponent ? Component : new Component();
 
-					console.log('Instance name: ', instance);
-
 					return instance.constructor.name.toLowerCase() === componentName;
 				});
 

@@ -17,8 +17,6 @@ export class Button extends ChildComponent {
 	render() {
 		this.element = renderService.htmlToElement(template, [], styles);
 
-		console.log('ELEMENT IN BTN RENDER: ', this.element);
-
 		$R(this.element).html(this.children).click(this.onClick);
 
 		if (this.variant) {

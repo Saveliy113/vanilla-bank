@@ -1,3 +1,5 @@
+import { formatCardNumberWithDashes } from '@/utils/format/format-card-number';
+
 /**
  * Represents RQuery class for working with DOM elements
  */
@@ -90,6 +92,75 @@ class RQuery {
 	 */
 	click(callback) {
 		this.element.addEventListener('click', callback);
+
+		return this;
+	}
+
+	/*   FORMS  */
+	/**
+	 * Set attributes and event listeners for an input element.
+	 * @param {object} options - An object containing input options.
+	 * @param {function(Event) :void} [options.onInput] - The event
+	 * listener for the input's input event.
+	 * @param {object} [options.rest] - Optional attributes to set on
+	 * the input element.
+	 * * @returns {RQuery} Current RQuery instance for chaining.
+	 *  */
+	input({ onInput, ...rest }) {
+		console.log(this.element.tagName.toLowerCase());
+		if (this.element.tagName.toLowerCase() !== 'input')
+			throw new Error('Element must be an input');
+
+		for (const [key, value] of Object.entries(rest)) {
+			this.element.setAttribute(key, value);
+		}
+
+		if (onInput) {
+			this.element.addEventListener('input', onInput);
+		}
+
+		return this;
+	}
+
+	/**
+	 * Set attributes and event listeners for a number input element.
+	 * @param {number} [limit] - The maximum length of input value.
+	 * @returns {RQuery} The current RQuery instance for chaining.
+	 */
+	numberInput(limit) {
+		if (
+			this.element.tagName.toLowerCase() !== 'input' &&
+			this.element.type !== 'number'
+		)
+			throw new Error('Element must be an input with type "number"');
+
+		this.element.addEventListener('input', event => {
+			let value = event.target.value.replace(/[^0-9]/g, '');
+			if (limit) value = value.substring(0, limit);
+			event.target.value = value;
+		});
+		return this;
+	}
+
+	/**
+	 * Set attributes and event listeners for a credit card input
+	 * element.
+	 * @returns {RQuery} The current RQuery instance for chaining.
+	 */
+	creditCardInput() {
+		const limit = 16;
+
+		if (
+			this.element.tagName.toLowerCase() !== 'input' &&
+			this.element.type !== 'text'
+		)
+			throw new Error('Element must be an input with type "text"');
+
+		this.element.addEventListener('input', event => {
+			let value = event.target.value.replace(/[^0-9]/g, '');
+			if (limit) value = value.substring(0, limit);
+			event.target.value = formatCardNumberWithDashes(value);
+		});
 
 		return this;
 	}
