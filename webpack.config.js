@@ -54,7 +54,7 @@ module.exports = {
 		historyApiFallback: true
 	},
 	optimization: {
-		minimize: isDev,
+		minimize: !isDev,
 		minimizer: [
 			new CssMinimizerPlugin(),
 			new TerserPlugin({

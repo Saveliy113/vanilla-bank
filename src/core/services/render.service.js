@@ -10,12 +10,14 @@ class RenderService {
 	htmlToElement(html, components = [], styles) {
 		const template = document.createElement('template');
 		template.innerHTML = html.trim();
+
 		const element = template.content.firstChild;
 
 		if (styles) {
 			this.#applyModuleStyles(styles, element);
 		}
 
+		this.#replaceComponentTags(element, components);
 
 		return element;
 	}
@@ -40,6 +42,8 @@ class RenderService {
 				const foundComponent = components.find(Component => {
 					const instance =
 						Component instanceof ChildComponent ? Component : new Component();
+
+					console.log('Instance name: ', instance);
 
 					return instance.constructor.name.toLowerCase() === componentName;
 				});

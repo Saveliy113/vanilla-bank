@@ -1,8 +1,8 @@
-import ChildComponent from '@/core/component/child.component';
 import renderService from '@/core/services/render.service';
 import template from './button.template.html';
 import styles from './button.module.scss';
 import { $R } from '@/core/rquery/rquery.lib';
+import ChildComponent from '@/core/component/child.component';
 
 export class Button extends ChildComponent {
 	constructor({ children, onClick, variant }) {
@@ -13,8 +13,11 @@ export class Button extends ChildComponent {
 		this.onClick = onClick;
 		this.variant = variant;
 	}
+
 	render() {
 		this.element = renderService.htmlToElement(template, [], styles);
+
+		console.log('ELEMENT IN BTN RENDER: ', this.element);
 
 		$R(this.element).html(this.children).click(this.onClick);
 

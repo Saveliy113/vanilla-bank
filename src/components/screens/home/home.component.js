@@ -16,14 +16,16 @@ export class Home extends BaseScreen {
 			[
 				new Button({
 					children: 'Send',
-					onClick: () => alert('Hey'),
+					onClick: () => {
+						alert('Hey');
+					},
 					variant: 'green'
 				})
 			],
 			styles
 		);
-		$R(element).find('h1').css('background-color', 'green');
-		
+		// $R(element).find('h1').css('background-color', 'green');
+
 		return element;
 	}
 }
