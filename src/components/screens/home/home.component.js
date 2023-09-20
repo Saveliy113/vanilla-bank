@@ -21,7 +21,8 @@ export class Home extends BaseScreen {
 					variant: 'green'
 				}),
 				new UserItem({
-					avatarPath: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGQ8dQ-LMiMmTEyBijR0FzpQHC7tH6qTE2g&usqp=CAU',
+					avatarPath:
+						'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGQ8dQ-LMiMmTEyBijR0FzpQHC7tH6qTE2g&usqp=CAU',
 					name: 'Saveliy'
 				})
 			],
