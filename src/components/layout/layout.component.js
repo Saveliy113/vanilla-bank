@@ -4,6 +4,7 @@ import styles from './layout.module.scss';
 import { $R } from '@/core/rquery/rquery.lib';
 import { Header } from './header/header.component';
 import ChildComponent from '@/core/component/child.component';
+import { Notification } from './notification/notification.component';
 
 export class Layout extends ChildComponent {
 	constructor({ router, children }) {
@@ -13,7 +14,11 @@ export class Layout extends ChildComponent {
 	}
 
 	render() {
-		this.element = renderService.htmlToElement(template, [], styles);
+		this.element = renderService.htmlToElement(
+			template,
+			[Notification],
+			styles
+		);
 
 		const mainElement = $R(this.element).find('main');
 

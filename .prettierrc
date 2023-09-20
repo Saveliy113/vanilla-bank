@@ -4,7 +4,7 @@
 	"singleQuote": true,
 	"tabWidth": 2,
 	"trailingComma": "none",
-	"importOrder": [
+	"importOrder*": [
 		"<THIRD_PARTY_MODULES>",
 		"^@/core/(.*)$",
 		"^@/core/component/(.*)$",
