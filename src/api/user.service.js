@@ -8,7 +8,7 @@ export class UserService {
 			path: `${this.#BASE_URL}${
 				searchTerm ? `${new URLSearchParams({ searchTerm })}` : ''
 			}`,
-			onSuccess 
+			onSuccess
 		});
 	}
 }
