@@ -1,5 +1,8 @@
 import { SERVER_URL } from '@/config/url.config';
 import { extractErrorMessage } from './extract-error-message';
+import { StorageService } from '../services/storage.service';
+import { ACCESS_TOKEN_KEY } from '@/constants/auth.constants';
+import { NotificationService } from '../services/notification.service';
 
 /**
  *  RedQuery is a minimalistic library for handling API requests.
@@ -36,7 +39,7 @@ export async function redQuery({
 
 	/* ACCESS_TOKEN from LS */
 
-	const accessToken = '';
+	const accessToken = new StorageService().getItem(ACCESS_TOKEN_KEY);
 	const requestOptions = {
 		method,
 		headers: {
@@ -68,7 +71,7 @@ export async function redQuery({
 				onError(errorMessage);
 			}
 
-			/* Notification Error */
+			new NotificationService().show('error', errorMessage);
 		}
 	} catch (errorData) {
 		const errorMessage = extractErrorMessage(errorData);
