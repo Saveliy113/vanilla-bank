@@ -73,7 +73,7 @@ export class Store {
 	 * @param {string} accessToken - User's current access token.
 	 */
 	login(user, accessToken) {
-		this.user = user;
+		this.state.user = user;
 		this.storageService.setItem(USER_STORAGE_KEY, user);
 		this.storageService.setItem(ACCESS_TOKEN_KEY, accessToken);
 	}

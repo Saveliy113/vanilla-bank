@@ -26,7 +26,7 @@ class RQuery {
 	 * Find the first element which matches the specified selector
 	 * within selected element.
 	 * @param {string} selector - CSS selector string tyo search for within selected element.
-	 * @returns {RQuery} New RQUery instance for the found element.
+	 * @returns {RQuery} New RQuery instance for the found element.
 	 */
 	find(selector) {
 		const element = new RQuery(this.element.querySelector(selector));
@@ -198,6 +198,28 @@ class RQuery {
 			event.target.value = formatCardNumberWithDashes(value);
 		});
 
+		return this;
+	}
+
+	/*        STYLES    */
+
+	/**
+	 * Shows the selected element by removing the 'display' style
+	 * property.
+	 * @returns {RQuery} Current RQuery instance for chaining.
+	 */
+	show() {
+		this.element.style.removeProperty('display');
+		return this;
+	}
+
+	/**
+	 * Hides the selected element by setting the 'display' style
+	 * to none.
+	 * @returns {RQuery} Current RQuery instance for chaining.
+	 */
+	hide() {
+		this.element.style.display = 'none';
 		return this;
 	}
 
