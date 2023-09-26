@@ -113,6 +113,26 @@ class RQuery {
 	}
 
 	/*   FORMS  */
+
+	/**
+	 * Set an event listener for the submit event of a form element.
+	 * @param {function(Event): void} onSubmit - The event listener for
+	 * the form's submit event.
+	 * @returns {RQuery} - Current RQuery instance for chaining.
+	 */
+	submit(onSubmit) {
+		if (this.element.tagName.toLowerCase() === 'form') {
+			this.element.addEventListener('submit', event => {
+				event.preventDefault();
+				onSubmit(event);
+			});
+		} else {
+			throw new Error('Element must be a form');
+		}
+
+		return this;
+	}
+
 	/**
 	 * Set attributes and event listeners for an input element.
 	 * @param {object} options - An object containing input options.
@@ -250,7 +270,7 @@ class RQuery {
 			return this.element.getAttribute(attributeName);
 		} else {
 			this.element.setAttribute(attributeName, value);
-			return this;		
+			return this;
 		}
 	}
 }

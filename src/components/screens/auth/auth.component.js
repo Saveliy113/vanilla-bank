@@ -15,6 +15,22 @@ export class Auth extends BaseScreen {
 		this.AuthService = new AuthService();
 	}
 
+	#handleSubmit = event => {
+		console.log(event.target);
+	};
+
+	#changeFormType(event) {
+		event.preventDefault();
+
+		$R(this.element)
+			.find('h1')
+			.text(this.#isTypeLogin ? 'Register' : 'Sign In');
+
+		$R(event.target).text(this.#isTypeLogin ? 'Sign In' : 'Register');
+
+		this.#isTypeLogin = !this.#isTypeLogin;
+	}
+
 	render() {
 		this.element = renderService.htmlToElement(
 			template,
@@ -42,6 +58,13 @@ export class Auth extends BaseScreen {
 					type: 'password'
 				}).render()
 			);
+
+		$R(this.element)
+			.find('#change-form-type')
+			.click(this.#changeFormType.bind(this));
+
+		$R(this.element).find('form').submit(this.#handleSubmit);
+
 		return this.element;
 	}
 }
