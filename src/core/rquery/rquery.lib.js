@@ -9,6 +9,7 @@ class RQuery {
 	 * @param {string | HTMLElement} selector - CSS selector or HTMLElement
 	 */
 	constructor(selector) {
+		// console.log('SELECTOR: ' ,selector);
 		if (typeof selector === 'string') {
 			this.element = document.querySelector(selector);
 
@@ -35,6 +36,20 @@ class RQuery {
 		} else {
 			throw new Error(`Element ${selector} not found!`);
 		}
+	}
+
+	/**
+	 * Find all elements that match the specified selector within the
+	 * selected element.
+	 * @param {string} selector - CSS selector string to search for
+	 * within the selected element.
+	 * @returns {RQuery[]} An array of new RQuery instances for the
+	 * found elements.
+	 */
+	findAll(selector) {
+		const elements = this.element.querySelectorAll(selector);
+
+		return Array.from(elements).map(element => new RQuery(element));
 	}
 
 	/**
