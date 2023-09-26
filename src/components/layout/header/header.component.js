@@ -17,16 +17,21 @@ export class Header extends ChildComponent {
 		this.store.addObserver(this);
 
 		this.router = router;
+
+		this.userItem = new UserItem({
+			avatarPath: '/',
+			name: 'Saveliy'
+		});
 	}
 
 	update() {
-		console.log('UPDATED HEADER');
 		this.user = this.store.state.user;
 
 		const authSideElement = $R(this.element).find('#auth-side');
 
 		if (this.user) {
 			authSideElement.show();
+			this.userItem.update(this.user);
 			this.router.navigate('/');
 		} else {
 			authSideElement.hide();
@@ -36,16 +41,7 @@ export class Header extends ChildComponent {
 	render() {
 		this.element = renderService.htmlToElement(
 			template,
-			[
-				Logo,
-				new LogoutButton({ router: this.router }),
-				Search,
-				new UserItem({
-					avatarPath:
-						'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqGQ8dQ-LMiMmTEyBijR0FzpQHC7tH6qTE2g&usqp=CAU',
-					name: 'Saveliy'
-				})
-			],
+			[Logo, new LogoutButton({ router: this.router }), Search, this.userItem],
 			styles
 		);
 

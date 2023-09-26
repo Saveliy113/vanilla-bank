@@ -87,7 +87,7 @@ class RQuery {
 	 * Get or Set text of the selected element.
 	 * @param {string} [textContent] - optional text content to set. If
 	 * not provided, current text content will be returned.
-	 * @returns {RQuery | string} - The current RQuery instance for chaining when setting HTML content,
+	 * @returns {RQuery | string} - Current RQuery instance for chaining when setting HTML content,
 	 * or the current inner HTML when getting.
 	 */
 	text(textContent) {
@@ -97,6 +97,31 @@ class RQuery {
 			this.element.textContent = textContent;
 			return this;
 		}
+	}
+
+	/*       EVENTS      */
+
+	/**
+	 * Add on event listener to the selected element for the specified
+	 * event type.
+	 * @param {string} eventType - Type of the event to listen for (e.
+	 * g., 'click', 'input', etc.).
+	 * @param {function(Event): void} callback - Event listener
+	 * function to execute when the event is triggered. The function will
+	 * receive event object as its argument.
+	 * @returns {RQuery} Current RQuery instance for chaining when setting HTML content,
+	 * or the current inner HTML when getting.
+	 */
+	on(eventType, callback) {
+		if (typeof eventType !== 'string' || typeof callback !== 'function') {
+			throw new Error(
+				'Event type must be a string and callback must be a function'
+			);
+		}
+
+		this.element.addEventListener(eventType, callback);
+
+		return this;
 	}
 
 	/**

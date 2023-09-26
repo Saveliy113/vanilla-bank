@@ -43,7 +43,7 @@
 				opacity 0.3s,
 				transform 0.3s;
 
-			&:visible {
+			&.visible {
 				opacity: 1;
 				transform: translateY(0);
 			}
