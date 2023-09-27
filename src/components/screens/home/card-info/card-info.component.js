@@ -9,7 +9,7 @@ import { formatCardNumber } from '@/utils/format/format-card-number';
 import { formatToCurrency } from '@/utils/format/format-to-currency';
 import { BALANCE_UPDATED } from '@/constants/event.constants';
 
-const CODE = '*****';
+const CODE = '***';
 
 export class CardInfo extends ChildComponent {
 	constructor() {
