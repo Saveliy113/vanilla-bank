@@ -241,6 +241,23 @@ class RQuery {
 		return this;
 	}
 
+	/**
+	 * Gets or sets the value of an input element.
+	 * @param {string} [newValue] - The new value to set for the input
+	 * element. If not provided, the method returns the current value.
+	 * @returns {string|RQuery} - If new value is provided, returns the
+	 * RQuery instance. Otherwise, returns the current value of the input
+	 * element.
+	 */
+	value(newValue) {
+		if (typeof newValue === 'undefined') {
+			return this.element.value;
+		} else {
+			this.element.value = newValue;
+			return this;
+		}
+	}
+
 	/*        STYLES    */
 
 	/**
@@ -334,6 +351,21 @@ class RQuery {
 			this.element.setAttribute(attributeName, value);
 			return this;
 		}
+	}
+
+	/**
+	 * Removes an attribute from the current element.
+	 * @param {string} attrName - Name of the attribute to remove.
+	 * @return {RQuery} - RQuery instance for chaining.
+	 */
+	removeAttr(attrName) {
+		if (typeof attrName !== 'string') {
+			throw new Error('attributeName must be a string');
+		}
+
+		this.element.removeAttribute(attrName);
+
+		return this;
 	}
 }
 

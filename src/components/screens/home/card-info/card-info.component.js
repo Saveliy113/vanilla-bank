@@ -7,6 +7,7 @@ import { Store } from '@/core/store/store';
 import { $R } from '@/core/rquery/rquery.lib';
 import { formatCardNumber } from '@/utils/format/format-card-number';
 import { formatToCurrency } from '@/utils/format/format-to-currency';
+import { BALANCE_UPDATED } from '@/constants/event.constants';
 
 const CODE = '*****';
 
@@ -17,6 +18,24 @@ export class CardInfo extends ChildComponent {
 
 		this.store = Store.getInstance();
 		this.cardService = new CardService();
+
+		this.#addListeners();
+	}
+
+	#addListeners() {
+		document.addEventListener(BALANCE_UPDATED, this.#onBalanceUpdated);
+	}
+
+	#removeListeners() {
+		document.removeEventListener(BALANCE_UPDATED, this.#onBalanceUpdated);
+	}
+
+	#onBalanceUpdated = () => {
+		this.fetchData();
+	};
+
+	destroy() {
+		this.#removeListeners();
 	}
 
 	#copyCardNumber(event) {
